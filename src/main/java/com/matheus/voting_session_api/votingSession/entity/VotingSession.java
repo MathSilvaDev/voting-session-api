@@ -26,11 +26,35 @@ public class VotingSession {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private Instant startAt;
+
+    @Column(nullable = false)
+    private Instant endAt;
+
     @OneToMany(mappedBy = "votingSession")
     private Set<Vote> votes = new HashSet<>();
 
-    public VotingSession(String topic, String description){
+    public VotingSession(String topic, String description, Instant startAt, Instant endAt){
         this.topic = topic;
         this.description = description;
+        verifyDate(startAt, endAt);
+    }
+
+    public boolean isActive(){
+        Instant now = Instant.now();
+
+        return now.isAfter(startAt) && now.isBefore(endAt);
+    }
+
+    private void verifyDate(Instant startAt, Instant endAt){
+        Instant now = Instant.now();
+
+        boolean isValid = now.isBefore(startAt) && startAt.isBefore(endAt);
+
+        if (isValid){
+            this.startAt = startAt;
+            this.endAt = endAt;
+        }
     }
 }
