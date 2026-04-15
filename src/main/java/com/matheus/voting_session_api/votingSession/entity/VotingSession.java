@@ -1,22 +1,23 @@
-package com.matheus.voting_session_api.vote.entity;
+package com.matheus.voting_session_api.votingSession.entity;
 
-import com.matheus.voting_session_api.vote.enums.VoteValue;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "vote")
+@Table(name = "voting_session")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Vote {
+public class VotingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VoteValue voteValue;
+    private String topic;
+
+    @Column(nullable = false)
+    private String description;
 }
