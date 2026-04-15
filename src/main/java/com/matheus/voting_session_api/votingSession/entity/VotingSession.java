@@ -50,11 +50,24 @@ public class VotingSession {
     private void verifyDate(Instant startAt, Instant endAt){
         Instant now = Instant.now();
 
+        if(startAt == null && endAt == null){
+            this.startAt = now.plusSeconds(1);
+            this.endAt = this.startAt.plusSeconds(60);
+            return;
+        }else if(startAt == null){
+            startAt = now.plusSeconds(1);
+        }else if (endAt == null) {
+            endAt = startAt.plusSeconds(60);
+        }
+
         boolean isValid = now.isBefore(startAt) && startAt.isBefore(endAt);
 
         if (isValid){
             this.startAt = startAt;
             this.endAt = endAt;
+        }else{
+            this.startAt = null;
+            this.endAt = null;
         }
     }
 }

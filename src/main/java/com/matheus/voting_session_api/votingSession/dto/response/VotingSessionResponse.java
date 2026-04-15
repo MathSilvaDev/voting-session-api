@@ -7,6 +7,5 @@ public record VotingSessionResponse(
         String topic,
         String description,
         Instant startAt,
-        Instant endAt,
-        VotingSessionQtdResponse voteSessionQuantity
+        Instant endAt
 ) { }
