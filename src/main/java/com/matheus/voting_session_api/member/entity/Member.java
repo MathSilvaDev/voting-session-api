@@ -1,10 +1,14 @@
 package com.matheus.voting_session_api.member.entity;
 
+import com.matheus.voting_session_api.vote.entity.Vote;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,5 +23,12 @@ public class Member {
 
     @Column(nullable = false, unique = true)
     private String cpf;
+
+    @OneToMany(mappedBy = "member")
+    private Set<Vote> votes = new HashSet<>();
+
+    public Member(String cpf){
+        this.cpf = cpf;
+    }
 
 }
