@@ -34,4 +34,11 @@ public class VotingSessionController {
                 votingSessionService.findAll()
         );
     }
+
+    @GetMapping("/activated")
+    public ResponseEntity<List<VotingSessionInfo>> findAllActivated(){
+        return ResponseEntity.ok(
+                votingSessionService.findAllActivated()
+        );
+    }
 }

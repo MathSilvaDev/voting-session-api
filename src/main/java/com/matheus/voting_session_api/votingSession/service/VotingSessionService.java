@@ -39,6 +39,15 @@ public class VotingSessionService {
                 .toList();
     }
 
+    public List<VotingSessionInfo> findAllActivated(){
+
+        return votingSessionrepository.findAll()
+                .stream()
+                .filter(VotingSession::isActive)
+                .map(this::toResponseInfo)
+                .toList();
+    }
+
     private VotingSessionResponse toResponse(VotingSession votingSession){
         return new VotingSessionResponse(
                 votingSession.getId(),
