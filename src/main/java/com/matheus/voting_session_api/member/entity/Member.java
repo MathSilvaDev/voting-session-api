@@ -31,4 +31,8 @@ public class Member {
         this.cpf = cpf;
     }
 
+    public void addVote(Vote vote){
+        votes.add(vote);
+    }
+
 }

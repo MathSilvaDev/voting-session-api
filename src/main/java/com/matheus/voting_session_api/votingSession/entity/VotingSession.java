@@ -41,6 +41,10 @@ public class VotingSession {
         verifyDate(startAt, endAt);
     }
 
+    public void addVote(Vote vote){
+        votes.add(vote);
+    }
+
     public boolean isActive(){
         Instant now = Instant.now();
 
