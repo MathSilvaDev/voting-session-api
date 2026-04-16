@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 
@@ -16,6 +17,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(status)
                 .body(new ApiError(message, Instant.now()));
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ApiError> handleResponseStatus(ResponseStatusException e){
+        HttpStatus httpStatus = HttpStatus.valueOf(e.getStatusCode().value());
+        return toResponse(e.getReason(), httpStatus);
     }
 
     @ExceptionHandler(VotingSessionExpiredException.class)

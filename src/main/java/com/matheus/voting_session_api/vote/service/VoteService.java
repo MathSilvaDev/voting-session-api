@@ -26,7 +26,8 @@ public class VoteService {
     public void voteBySessionIdAndCpf(String cpf, Long sessionId, VoteRequest request){
 
         VotingSession votingSession = votingSessionRepository.findById(sessionId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Session Not Found"));
 
         if(!votingSession.isActive()){
             throw new VotingSessionExpiredException();
