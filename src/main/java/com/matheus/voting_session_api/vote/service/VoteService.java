@@ -1,12 +1,13 @@
 package com.matheus.voting_session_api.vote.service;
 
+import com.matheus.voting_session_api.exception.votingsession.VotingSessionExpiredException;
 import com.matheus.voting_session_api.member.entity.Member;
 import com.matheus.voting_session_api.member.repository.MemberRepository;
 import com.matheus.voting_session_api.vote.dto.request.VoteRequest;
 import com.matheus.voting_session_api.vote.entity.Vote;
 import com.matheus.voting_session_api.vote.repository.VoteRepository;
-import com.matheus.voting_session_api.votingSession.entity.VotingSession;
-import com.matheus.voting_session_api.votingSession.repository.VotingSessionRepository;
+import com.matheus.voting_session_api.votingsession.entity.VotingSession;
+import com.matheus.voting_session_api.votingsession.repository.VotingSessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,14 @@ public class VoteService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void voteBySessionIdAndCpf(Long sessionId, String cpf, VoteRequest request){
+    public void voteBySessionIdAndCpf(String cpf, Long sessionId, VoteRequest request){
 
         VotingSession votingSession = votingSessionRepository.findById(sessionId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if(!votingSession.isActive()){
+            throw new VotingSessionExpiredException();
+        }
 
         Member member = memberRepository.findByCpf(cpf)
                 .orElseGet(() -> memberRepository.save(new Member(cpf)));

@@ -14,12 +14,12 @@ public class VoteController {
 
     private final VoteService voteService;
 
-    @PostMapping("/sessions/{id}/votes/{cpf}")
+    @PostMapping("{cpf}/sessions/{id}")
     public ResponseEntity<Void> voteBySessionIdAndCpf(
-            @PathVariable("id") Long sessionId, @PathVariable String cpf,
+            @PathVariable String cpf, @PathVariable("id") Long sessionId,
             @Valid @RequestBody VoteRequest request){
 
-        voteService.voteBySessionIdAndCpf(sessionId, cpf, request);
+        voteService.voteBySessionIdAndCpf(cpf, sessionId, request);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,4 +1,4 @@
-package com.matheus.voting_session_api.votingSession.dto.request;
+package com.matheus.voting_session_api.votingsession.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

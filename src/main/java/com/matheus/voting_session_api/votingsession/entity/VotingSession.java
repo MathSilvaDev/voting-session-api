@@ -1,4 +1,4 @@
-package com.matheus.voting_session_api.votingSession.entity;
+package com.matheus.voting_session_api.votingsession.entity;
 
 import com.matheus.voting_session_api.vote.entity.Vote;
 import jakarta.persistence.*;
@@ -47,8 +47,9 @@ public class VotingSession {
 
     public boolean isActive(){
         Instant now = Instant.now();
+        Instant nowPlusOneSecond = now.plusSeconds(1);
 
-        return now.isAfter(startAt) && now.isBefore(endAt);
+        return nowPlusOneSecond.isAfter(startAt) && now.isBefore(endAt);
     }
 
     private void verifyDate(Instant startAt, Instant endAt){

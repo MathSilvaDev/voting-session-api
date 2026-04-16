@@ -2,7 +2,7 @@ package com.matheus.voting_session_api.vote.entity;
 
 import com.matheus.voting_session_api.member.entity.Member;
 import com.matheus.voting_session_api.vote.enums.VoteValue;
-import com.matheus.voting_session_api.votingSession.entity.VotingSession;
+import com.matheus.voting_session_api.votingsession.entity.VotingSession;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

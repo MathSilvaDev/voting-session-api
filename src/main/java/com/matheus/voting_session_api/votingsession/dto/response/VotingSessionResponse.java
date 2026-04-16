@@ -1,4 +1,4 @@
-package com.matheus.voting_session_api.votingSession.dto.response;
+package com.matheus.voting_session_api.votingsession.dto.response;
 
 import java.time.Instant;
 

@@ -1,11 +1,11 @@
-package com.matheus.voting_session_api.votingSession.service;
+package com.matheus.voting_session_api.votingsession.service;
 
 import com.matheus.voting_session_api.vote.enums.VoteValue;
-import com.matheus.voting_session_api.votingSession.dto.request.CreateSessionRequest;
-import com.matheus.voting_session_api.votingSession.dto.response.VotingSessionInfo;
-import com.matheus.voting_session_api.votingSession.dto.response.VotingSessionResponse;
-import com.matheus.voting_session_api.votingSession.entity.VotingSession;
-import com.matheus.voting_session_api.votingSession.repository.VotingSessionRepository;
+import com.matheus.voting_session_api.votingsession.dto.request.CreateSessionRequest;
+import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionInfo;
+import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionResponse;
+import com.matheus.voting_session_api.votingsession.entity.VotingSession;
+import com.matheus.voting_session_api.votingsession.repository.VotingSessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
