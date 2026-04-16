@@ -71,8 +71,7 @@ public class VotingSession {
             this.startAt = startAt;
             this.endAt = endAt;
         }else{
-            this.startAt = null;
-            this.endAt = null;
+            throw new IllegalArgumentException("Invalid dates");
         }
     }
 }
