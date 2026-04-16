@@ -54,7 +54,8 @@ public class VotingSessionService {
                 votingSession.getTopic(),
                 votingSession.getDescription(),
                 votingSession.getStartAt(),
-                votingSession.getEndAt()
+                votingSession.getEndAt(),
+                votingSession.isActive()
         );
     }
 
