@@ -1,7 +1,7 @@
 package com.matheus.voting_session_api.exception.global;
 
 import com.matheus.voting_session_api.api.ApiError;
-import com.matheus.voting_session_api.exception.votingsession.VotingSessionExpiredException;
+import com.matheus.voting_session_api.exception.votingsession.VotingSessionNotEnabledException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,8 +25,8 @@ public class GlobalExceptionHandler {
         return toResponse(e.getReason(), httpStatus);
     }
 
-    @ExceptionHandler(VotingSessionExpiredException.class)
-    public ResponseEntity<ApiError> votingSessionExpired(VotingSessionExpiredException e){
+    @ExceptionHandler(VotingSessionNotEnabledException.class)
+    public ResponseEntity<ApiError> votingSessionExpired(VotingSessionNotEnabledException e){
         return toResponse(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

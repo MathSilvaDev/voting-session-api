@@ -1,6 +1,6 @@
 package com.matheus.voting_session_api.vote.service;
 
-import com.matheus.voting_session_api.exception.votingsession.VotingSessionExpiredException;
+import com.matheus.voting_session_api.exception.votingsession.VotingSessionNotEnabledException;
 import com.matheus.voting_session_api.member.entity.Member;
 import com.matheus.voting_session_api.member.repository.MemberRepository;
 import com.matheus.voting_session_api.vote.dto.request.VoteRequest;
@@ -30,7 +30,7 @@ public class VoteService {
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Session Not Found"));
 
         if(!votingSession.isActive()){
-            throw new VotingSessionExpiredException();
+            throw new VotingSessionNotEnabledException();
         }
 
         Member member = memberRepository.findByCpf(cpf)
