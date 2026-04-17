@@ -1,6 +1,7 @@
 package com.matheus.voting_session_api.votingsession.service;
 
 import com.matheus.voting_session_api.votingsession.dto.request.CreateSessionRequest;
+import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionInfo;
 import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionResponse;
 import com.matheus.voting_session_api.votingsession.entity.VotingSession;
 import com.matheus.voting_session_api.votingsession.repository.VotingSessionRepository;
@@ -10,6 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -55,6 +59,43 @@ class VotingSessionServiceTest {
             assertTrue(response.isActivated());
 
             verify(votingSessionRepository).save(any(VotingSession.class));
+        }
+    }
+
+    @Nested
+    class FindAll{
+
+        @Test
+        void shouldReturnAllSuccessfully(){
+
+            List<VotingSession> votingSessions = createVotingSessions(3);
+
+            when(votingSessionRepository.findAll())
+                    .thenReturn(votingSessions);
+
+            List<VotingSessionInfo> response = votingSessionService.findAllActivated();
+
+            assertEquals(votingSessions.size(), response.size());
+
+            verify(votingSessionRepository).findAll();
+        }
+
+        private List<VotingSession> createVotingSessions(int num){
+
+            List<VotingSession> votingSessions = new ArrayList<>();
+
+            for (int i = 0; i < num; i++){
+                VotingSession votingSession = new VotingSession(
+                        "test-topic",
+                        "test-description",
+                        null,
+                        null
+                );
+
+                votingSessions.add(votingSession);
+            }
+
+            return votingSessions;
         }
     }
 
