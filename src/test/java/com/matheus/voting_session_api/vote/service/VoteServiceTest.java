@@ -1,5 +1,6 @@
 package com.matheus.voting_session_api.vote.service;
 
+import com.matheus.voting_session_api.exception.votingsession.VotingSessionNotEnabledException;
 import com.matheus.voting_session_api.member.entity.Member;
 import com.matheus.voting_session_api.member.repository.MemberRepository;
 import com.matheus.voting_session_api.vote.dto.request.VoteRequest;
@@ -16,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,6 +88,27 @@ class VoteServiceTest {
 
             assertThrows(ResponseStatusException.class,
                     () -> voteService.voteByCpfAndSessionId(cpf, sessionId, request));
+        }
+
+        @Test
+        void shouldThrowVotingSessionNotEnabled(){
+            VotingSession votingSession = new VotingSession(
+                    "test-topic",
+                    "test-description",
+                    Instant.now().plusSeconds(60),
+                    null
+            );
+
+            String cpf = "000.000.000-00";
+            Long sessionId = votingSession.getId();
+            VoteRequest request = new VoteRequest(VoteValue.NO);
+
+            when(votingSessionRepository.findById(sessionId))
+                    .thenReturn(Optional.of(votingSession));
+
+            assertThrows(VotingSessionNotEnabledException.class,
+                    () -> voteService.voteByCpfAndSessionId(cpf, sessionId, request));
+
         }
     }
 }
