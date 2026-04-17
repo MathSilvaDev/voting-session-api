@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -35,7 +34,7 @@ public class Member {
         votes.add(vote);
     }
 
-    public String normalizeCpf(String cpf){
+    public static String normalizeCpf(String cpf){
         //TODO: Implement full CPF validation logic (currently only normalizing input)
         String replacedCpf = cpf.replaceAll("[^0-9]", "");
 

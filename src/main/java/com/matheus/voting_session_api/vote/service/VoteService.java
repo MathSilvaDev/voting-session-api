@@ -33,7 +33,7 @@ public class VoteService {
             throw new VotingSessionNotEnabledException();
         }
 
-        Member member = memberRepository.findByCpf(cpf)
+        Member member = memberRepository.findByCpf(Member.normalizeCpf(cpf))
                 .orElseGet(() -> memberRepository.save(new Member(cpf)));
 
         Vote vote = new Vote(request.voteValue(), member, votingSession);
