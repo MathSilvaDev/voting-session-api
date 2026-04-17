@@ -9,6 +9,7 @@ import com.matheus.voting_session_api.votingsession.repository.VotingSessionRepo
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -33,7 +34,8 @@ public class VotingSessionService {
 
     public List<VotingSessionInfo> findAll(){
 
-        return votingSessionrepository.findAll()
+        return votingSessionrepository
+                .findAll()
                 .stream()
                 .map(this::toResponseInfo)
                 .toList();
@@ -41,9 +43,11 @@ public class VotingSessionService {
 
     public List<VotingSessionInfo> findAllActivated(){
 
-        return votingSessionrepository.findAll()
+        Instant now = Instant.now();
+
+        return votingSessionrepository
+                .findByStartAtBeforeAndEndAtAfter(now, now)
                 .stream()
-                .filter(VotingSession::isActive)
                 .map(this::toResponseInfo)
                 .toList();
     }

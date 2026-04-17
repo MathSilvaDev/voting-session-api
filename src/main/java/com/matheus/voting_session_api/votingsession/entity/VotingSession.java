@@ -47,25 +47,24 @@ public class VotingSession {
 
     public boolean isActive(){
         Instant now = Instant.now();
-        Instant nowPlusOneSecond = now.plusSeconds(1);
-
-        return nowPlusOneSecond.isAfter(startAt) && now.isBefore(endAt);
+        return startAt.isBefore(now) && endAt.isAfter(now);
     }
 
     private void verifyDate(Instant startAt, Instant endAt){
         Instant now = Instant.now();
+        Instant nowMinusSecond = now.minusSeconds(1);
 
         if(startAt == null && endAt == null){
-            this.startAt = now.plusSeconds(1);
+            this.startAt = now;
             this.endAt = this.startAt.plusSeconds(60);
             return;
         }else if(startAt == null){
-            startAt = now.plusSeconds(1);
+            startAt = now;
         }else if (endAt == null) {
             endAt = startAt.plusSeconds(60);
         }
 
-        boolean isValid = now.isBefore(startAt) && startAt.isBefore(endAt);
+        boolean isValid = startAt.isAfter(nowMinusSecond) && startAt.isBefore(endAt);
 
         if (isValid){
             this.startAt = startAt;
