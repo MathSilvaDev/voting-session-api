@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -72,6 +73,19 @@ class VoteServiceTest {
             verify(votingSessionRepository).findById(sessionId);
             verify(memberRepository).findByCpf(Member.normalizeCpf(cpf));
             verify(voteRepository).save(any(Vote.class));
+        }
+
+        @Test
+        void shouldThrowVotingSessionNotFound(){
+            String cpf = "000.000.000-00";
+            Long sessionId = 1L;
+            VoteRequest request = new VoteRequest(VoteValue.NO);
+
+            when(votingSessionRepository.findById(sessionId))
+                    .thenReturn(Optional.empty());
+
+            assertThrows(ResponseStatusException.class,
+                    () -> voteService.voteByCpfAndSessionId(cpf, sessionId, request));
         }
     }
 }
