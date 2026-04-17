@@ -23,7 +23,7 @@ public class VoteService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void voteBySessionIdAndCpf(String cpf, Long sessionId, VoteRequest request){
+    public void voteByCpfAndSessionId(String cpf, Long sessionId, VoteRequest request){
 
         VotingSession votingSession = votingSessionRepository.findById(sessionId)
                 .orElseThrow(() ->

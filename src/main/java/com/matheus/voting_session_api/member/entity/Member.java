@@ -28,11 +28,16 @@ public class Member {
     private Set<Vote> votes = new HashSet<>();
 
     public Member(String cpf){
-        this.cpf = cpf;
+        this.cpf = normalizeCpf(cpf);
     }
 
     public void addVote(Vote vote){
         votes.add(vote);
+    }
+
+    public String normalizeCpf(String cpf){
+        //TODO: Implement full CPF validation logic (currently only normalizing input)
+        return cpf.replaceAll("[^0-9]", "");
     }
 
 }

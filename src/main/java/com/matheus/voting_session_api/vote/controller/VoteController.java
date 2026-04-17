@@ -15,11 +15,11 @@ public class VoteController {
     private final VoteService voteService;
 
     @PostMapping("{cpf}/sessions/{id}")
-    public ResponseEntity<Void> voteBySessionIdAndCpf(
+    public ResponseEntity<Void> voteByCpfAndSessionId(
             @PathVariable String cpf, @PathVariable("id") Long sessionId,
             @Valid @RequestBody VoteRequest request){
 
-        voteService.voteBySessionIdAndCpf(cpf, sessionId, request);
+        voteService.voteByCpfAndSessionId(cpf, sessionId, request);
         return ResponseEntity.noContent().build();
     }
 
