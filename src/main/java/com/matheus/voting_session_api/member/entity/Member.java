@@ -37,7 +37,13 @@ public class Member {
 
     public String normalizeCpf(String cpf){
         //TODO: Implement full CPF validation logic (currently only normalizing input)
-        return cpf.replaceAll("[^0-9]", "");
+        String replacedCpf = cpf.replaceAll("[^0-9]", "");
+
+        if(replacedCpf.length() != 11){
+            throw new IllegalArgumentException("Invalid CPF");
+        }
+
+        return replacedCpf;
     }
 
 }
