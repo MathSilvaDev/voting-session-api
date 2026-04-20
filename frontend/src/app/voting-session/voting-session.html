@@ -27,14 +27,14 @@
 
         @for (item of votingSessions; track $index) {
           <div>
-            <h2>TOPIC</h2>
+            <h2>{{ item.topic }}</h2>
 
             <div>
-              <span>startAt</span>
-              <span>endAt</span>
+              <span>{{ item.startAt }}</span>
+              <span>{{ item.endAt }}</span>
             </div>
           
-            <p>Description</p>
+            <p>{{ item.description }}</p>
 
             <div>
               <button>YES</button>

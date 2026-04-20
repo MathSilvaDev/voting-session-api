@@ -14,7 +14,7 @@ export class VotingSessionService {
   constructor(private http: HttpClient){}
 
   create(createSessionRequest: CreateSessionRequest): Observable<VotingSessionResponse>{
-    return this.http.post<VotingSessionResponse>(`${this.API_URL}`, {createSessionRequest});
+    return this.http.post<VotingSessionResponse>(`${this.API_URL}`, {...createSessionRequest});
   }
 
   findAll(): Observable<VotingSessionResponse[]>{
