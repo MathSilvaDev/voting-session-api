@@ -1,1 +1,19 @@
-<p>voting-session works!</p>
+<div>
+  <div>
+    <form (ngSubmit)="createVotingSession()">
+      <label for="topic">Topic:</label>
+      <input type="text" name="topic" id="topic" [(ngModel)]="topic">
+
+      <label for="description">Description:</label>
+      <input type="text" name="description" id="description" [(ngModel)]="description">
+
+      <label for="start">Start At:</label>
+      <input type="datetime-local" name="start" id="start" [(ngModel)]="startAt">
+
+      <label for="end">End At</label>
+      <input type="datetime-local" name="end" id="end" [(ngModel)]="endAt">
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
