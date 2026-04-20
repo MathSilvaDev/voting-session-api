@@ -1,12 +1,12 @@
 <div>
-  <div>
+  <div class="container">
     <h1>Voting session</h1>
-    <form (ngSubmit)="createVotingSession()">
+    <form class="form-session" (ngSubmit)="createVotingSession()">
       <label for="topic">Topic:</label>
-      <input type="text" name="topic" id="topic" [(ngModel)]="topic">
+      <input type="text" name="topic" id="topic" [(ngModel)]="topic" required>
 
       <label for="description">Description:</label>
-      <input type="text" name="description" id="description" [(ngModel)]="description">
+      <input type="text" name="description" id="description" [(ngModel)]="description" required>
 
       <label for="start">Start At:</label>
       <input type="datetime-local" name="start" id="start" [(ngModel)]="startAt">
@@ -17,10 +17,10 @@
       <button type="submit">Submit</button>
     </form>
 
-    <div>
-      <form>
+    <div class="session">
+      <form class="form-cpf">
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" [(ngModel)]="cpf" placeholder="minimum of 8 characters">
+        <input type="text" name="cpf" id="cpf" [(ngModel)]="cpf" placeholder="minimum of 11 numbers">
       </form>
 
       <div>

@@ -1,0 +1,171 @@
+.container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.form-session {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.form-session label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-session input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-session button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.form-session button:hover {
+  background: #333;
+}
+
+.session {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-cpf {
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-cpf label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-cpf input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.session > div:last-child {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.session > div > div {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-left: 5px solid #111;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.session h2 {
+  margin: 0 0 10px 0;
+  color: #111;
+}
+
+.session p {
+  color: #444;
+  margin: 10px 0;
+}
+
+.session span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.session > div > div > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.session > div > div > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.session button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.session button:first-child {
+  background: #111;
+  color: #fff;
+}
+
+.session button:last-child {
+  background: #ccc;
+  color: #000;
+}
+
+.session button:hover {
+  opacity: 0.85;
+}
+
+@media (min-width: 1600px) {
+  .form-session,
+  .session {
+    max-width: 1200px;
+  }
+
+  body {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .form-session,
+  .session {
+    max-width: 1600px;
+  }
+
+  body {
+    font-size: 20px;
+  }
+}
