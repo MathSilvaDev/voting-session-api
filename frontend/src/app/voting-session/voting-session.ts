@@ -15,7 +15,7 @@ export class VotingSession {
   startAt: string = '';
   endAt: string = '';
 
-  votingSessions: string[] = ['test', 'test'];
+  votingSessions: string[] = ['test', 'test', 'test'];
 
   cpf: string = '';
 
