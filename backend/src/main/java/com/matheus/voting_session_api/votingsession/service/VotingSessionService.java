@@ -64,23 +64,23 @@ public class VotingSessionService {
     }
 
     private VotingSessionInfo toResponseInfo(VotingSession votingSession){
-        long totalVotesQtd = votingSession.getVotes().size();
+        long totalVotes = votingSession.getVotes().size();
 
-        long noVotesQtd = votingSession.getVotes()
+        long noVotes = votingSession.getVotes()
                 .stream()
                 .filter(v -> v.getVoteValue() == VoteValue.NO)
                 .count();
 
-        long yesVotesQtd = votingSession.getVotes()
+        long yesVotes = votingSession.getVotes()
                 .stream()
                 .filter(v -> v.getVoteValue() == VoteValue.YES)
                 .count();
 
         return new VotingSessionInfo(
                 toResponse(votingSession),
-                totalVotesQtd,
-                noVotesQtd,
-                yesVotesQtd
+                totalVotes,
+                noVotes,
+                yesVotes
         );
     }
 }
