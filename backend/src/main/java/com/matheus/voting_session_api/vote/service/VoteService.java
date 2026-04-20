@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
+
 @Service
 @RequiredArgsConstructor
 public class VoteService {
@@ -25,12 +27,20 @@ public class VoteService {
     @Transactional
     public void voteByCpfAndSessionId(String cpf, Long sessionId, VoteRequest request){
 
+        Instant now = Instant.now();
+
         VotingSession votingSession = votingSessionRepository.findById(sessionId)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Session Not Found"));
 
         if(!votingSession.isActive()){
-            throw new VotingSessionNotEnabledException();
+            if(now.isBefore(votingSession.getStartAt())){
+                throw new VotingSessionNotEnabledException("Voting session has not started yet");
+            }
+
+            if(now.isAfter(votingSession.getEndAt())){
+                throw new VotingSessionNotEnabledException("Voting session has already ended");
+            }
         }
 
         Member member = memberRepository.findByCpf(Member.normalizeCpf(cpf))
