@@ -8,5 +8,6 @@ public record VotingSessionResponse(
         String description,
         Instant startAt,
         Instant endAt,
-        boolean isActivated
+        boolean isActivated,
+        VotingSessionInfo votingSessionInfo
 ) { }

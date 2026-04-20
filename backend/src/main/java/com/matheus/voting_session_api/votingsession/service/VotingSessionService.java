@@ -32,23 +32,23 @@ public class VotingSessionService {
         return toResponse(votingSession);
     }
 
-    public List<VotingSessionInfo> findAll(){
+    public List<VotingSessionResponse> findAll(){
 
         return votingSessionrepository
                 .findAll()
                 .stream()
-                .map(this::toResponseInfo)
+                .map(this::toResponse)
                 .toList();
     }
 
-    public List<VotingSessionInfo> findAllActivated(){
+    public List<VotingSessionResponse> findAllActivated(){
 
         Instant now = Instant.now();
 
         return votingSessionrepository
                 .findByStartAtBeforeAndEndAtAfter(now, now)
                 .stream()
-                .map(this::toResponseInfo)
+                .map(this::toResponse)
                 .toList();
     }
 
@@ -59,7 +59,8 @@ public class VotingSessionService {
                 votingSession.getDescription(),
                 votingSession.getStartAt(),
                 votingSession.getEndAt(),
-                votingSession.isActive()
+                votingSession.isActive(),
+                toResponseInfo(votingSession)
         );
     }
 
@@ -77,7 +78,6 @@ public class VotingSessionService {
                 .count();
 
         return new VotingSessionInfo(
-                toResponse(votingSession),
                 totalVotes,
                 noVotes,
                 yesVotes

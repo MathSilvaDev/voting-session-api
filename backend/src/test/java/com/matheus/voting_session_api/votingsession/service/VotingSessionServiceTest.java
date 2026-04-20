@@ -73,7 +73,7 @@ class VotingSessionServiceTest {
             when(votingSessionRepository.findAll())
                     .thenReturn(votingSessions);
 
-            List<VotingSessionInfo> response = votingSessionService.findAll();
+            List<VotingSessionResponse> response = votingSessionService.findAll();
 
             assertEquals(votingSessions.size(), response.size());
 

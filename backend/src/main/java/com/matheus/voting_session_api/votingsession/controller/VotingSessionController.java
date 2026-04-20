@@ -29,14 +29,14 @@ public class VotingSessionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VotingSessionInfo>> findAll(){
+    public ResponseEntity<List<VotingSessionResponse>> findAll(){
         return ResponseEntity.ok(
                 votingSessionService.findAll()
         );
     }
 
     @GetMapping("/activated")
-    public ResponseEntity<List<VotingSessionInfo>> findAllActivated(){
+    public ResponseEntity<List<VotingSessionResponse>> findAllActivated(){
         return ResponseEntity.ok(
                 votingSessionService.findAllActivated()
         );
