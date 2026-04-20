@@ -15,5 +15,11 @@ export class VotingSession {
   startAt: string = '';
   endAt: string = '';
 
+  votingSessions: string[] = ['test'];
+
+  cpf: string = '';
+
   createVotingSession(){}
+
+  vote(){}
 }

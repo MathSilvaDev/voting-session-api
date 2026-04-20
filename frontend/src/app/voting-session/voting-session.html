@@ -1,5 +1,6 @@
 <div>
   <div>
+    <h1>Voting session</h1>
     <form (ngSubmit)="createVotingSession()">
       <label for="topic">Topic:</label>
       <input type="text" name="topic" id="topic" [(ngModel)]="topic">
@@ -15,5 +16,35 @@
       
       <button type="submit">Submit</button>
     </form>
+
+    <div>
+      <form>
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf" [(ngModel)]="cpf" placeholder="minimum of 8 characters">
+      </form>
+
+      <div>
+
+        @for (item of votingSessions; track $index) {
+          <div>
+            <h2>TOPIC</h2>
+
+            <div>
+              <span>startAt</span>
+              <span>endAt</span>
+            </div>
+          
+            <p>Description</p>
+
+            <div>
+              <button>YES</button>
+              <button>NO</button>
+            </div>
+          </div>
+        }
+        
+      </div>
+    </div>
+
   </div>
 </div>
