@@ -9,6 +9,7 @@ import com.matheus.voting_session_api.vote.repository.VoteRepository;
 import com.matheus.voting_session_api.votingsession.entity.VotingSession;
 import com.matheus.voting_session_api.votingsession.repository.VotingSessionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,9 +49,10 @@ public class VoteService {
 
         Vote vote = new Vote(request.voteValue(), member, votingSession);
 
-        member.addVote(vote);
-        votingSession.addVote(vote);
-
-        voteRepository.save(vote);
+        try {
+            voteRepository.save(vote);
+        } catch (DataIntegrityViolationException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "user already voted");
+        }
     }
 }

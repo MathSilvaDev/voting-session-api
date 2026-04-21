@@ -9,7 +9,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "vote")
+@Table(
+        name = "vote",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"member_id", "voting_session_id"})
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Vote {
