@@ -36,7 +36,7 @@ export class VotingSession {
         this.votingSessions.push(value);
       },
       error: (err) => {
-        console.log(request);
+        console.log(err);
       }
     });
   }
@@ -71,5 +71,14 @@ export class VotingSession {
       "startAt": startAt,
       "endAt": endAt
     }
+  }
+
+  dateFormat(date: Date): string{
+    const localDate: Date = new Date(date);
+
+    return localDate.toLocaleString(undefined, {
+      hour12: false
+    }).replace(",", "");
+  
   }
 }

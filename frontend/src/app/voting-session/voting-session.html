@@ -30,8 +30,8 @@
             <h2>{{ item.topic }}</h2>
 
             <div>
-              <span>StartAt: {{ item.startAt }}</span>
-              <span>EndAt: {{ item.endAt }}</span>
+              <span>StartAt: {{ dateFormat(item.startAt) }}</span>
+              <span>EndAt: {{ dateFormat(item.endAt) }}</span>
             </div>
           
             <p>{{ item.description }}</p>
