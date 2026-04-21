@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { VoteRequest } from './model/vote-request';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,11 +11,9 @@ export class VoteService {
 
   constructor(private http: HttpClient){}
 
-
-  //improve later | return values in backend
-  vote(voteRequest: VoteRequest, cpf: string, sessionId: number): Observable<void>{
+  vote(voteValue: string, cpf: string, sessionId: number): Observable<void>{
     return this.http.post<void>(
-      `${this.API_URL}/${cpf}/sessions/${sessionId}`, {...voteRequest}
+      `${this.API_URL}/${cpf}/sessions/${sessionId}`, {voteValue}
     )
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { VotingSessionResponse } from './model/response/voting-session-response';
 import { CreateSessionRequest } from './model/request/create-session-request';
 import { VotingSessionService } from './service/voting-session.service';
+import { VoteService } from '../vote/vote.service';
 
 @Component({
   selector: 'app-voting-session',
@@ -22,7 +23,10 @@ export class VotingSession {
 
   cpf: string = '';
 
-  constructor(private votingSessionService: VotingSessionService){}
+  constructor(
+    private votingSessionService: VotingSessionService,
+    private voteService: VoteService
+  ){}
 
   ngOnInit(){
     this.findAll();
@@ -45,11 +49,34 @@ export class VotingSession {
     this.votingSessionService.findAll().subscribe({
       next: (values) => {
         this.votingSessions = values;
+      },
+      error: (err) => {
+        console.log(err);
       }
-    })
+    });
   }
 
-  vote(){}
+  vote(voteValue: string, sessionId: number){
+    this.voteService.vote(voteValue, this.cpf, sessionId).subscribe({
+      next: () => {
+        this.votingSessions.forEach((v) => {
+          if(v.id === sessionId){
+            v.votingSessionInfo.totalVotes++
+
+            if(voteValue === "YES"){
+              v.votingSessionInfo.yesVotes++
+            }
+            else if(voteValue === "NO"){
+              v.votingSessionInfo.noVotes++
+            }
+          }
+        })
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   getDefaultVotingRequest(): CreateSessionRequest{
     const topic: string = this.topic.trim();

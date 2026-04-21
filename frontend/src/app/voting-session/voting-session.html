@@ -20,25 +20,32 @@
     <div class="session">
       <form class="form-cpf">
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" [(ngModel)]="cpf" placeholder="minimum of 11 numbers">
+        <input type="text" name="cpf" id="cpf" [(ngModel)]="cpf" placeholder="required 11 numbers">
       </form>
 
       <div>
 
-        @for (item of votingSessions; track $index) {
+        @for (session of votingSessions; track $index) {
           <div>
-            <h2>{{ item.topic }}</h2>
 
             <div>
-              <span>StartAt: {{ dateFormat(item.startAt) }}</span>
-              <span>EndAt: {{ dateFormat(item.endAt) }}</span>
+              <span>StartAt: {{ dateFormat(session.startAt) }}</span>
+              <span>EndAt: {{ dateFormat(session.endAt) }}</span>
             </div>
+
+            <h2>{{ session.topic }}</h2>
           
-            <p>{{ item.description }}</p>
+            <p>{{ session.description }}</p>
+
+            <div class="vote-stats">
+              <span>Yes Votes: {{ session.votingSessionInfo.yesVotes }}</span>
+              <span>Total Votes: {{ session.votingSessionInfo.totalVotes }}</span>
+              <span>No Votes: {{ session.votingSessionInfo.noVotes }}</span>
+            </div>
 
             <div>
-              <button>YES</button>
-              <button>NO</button>
+              <button (click)="vote('YES', session.id)">YES</button>
+              <button (click)="vote('NO', session.id)">NO</button>
             </div>
           </div>
         }

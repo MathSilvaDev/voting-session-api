@@ -113,7 +113,7 @@ h1 {
   color: #666;
 }
 
-.session > div > div > div:nth-child(2) {
+.session > div > div > div:nth-child(1) {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -146,6 +146,19 @@ h1 {
 
 .session button:hover {
   opacity: 0.85;
+}
+
+.vote-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.vote-stats span {
+  width: 33%;
+  text-align: center;
 }
 
 @media (min-width: 1600px) {
