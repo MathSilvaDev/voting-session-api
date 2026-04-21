@@ -24,6 +24,10 @@ export class VotingSession {
 
   constructor(private votingSessionService: VotingSessionService){}
 
+  ngOnInit(){
+    this.findAll();
+  }
+
   createVotingSession(){
     const request: CreateSessionRequest = this.getDefaultVotingRequest();
 
@@ -35,6 +39,14 @@ export class VotingSession {
         console.log(request);
       }
     });
+  }
+
+  findAll(){
+    this.votingSessionService.findAll().subscribe({
+      next: (values) => {
+        this.votingSessions = values;
+      }
+    })
   }
 
   vote(){}
