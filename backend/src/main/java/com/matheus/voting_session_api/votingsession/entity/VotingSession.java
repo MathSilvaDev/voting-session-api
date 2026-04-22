@@ -41,10 +41,6 @@ public class VotingSession {
         verifyDate(startAt, endAt);
     }
 
-    public void addVote(Vote vote){
-        votes.add(vote);
-    }
-
     public boolean isActive(){
         Instant now = Instant.now();
         return startAt.isBefore(now) && endAt.isAfter(now);
@@ -52,7 +48,7 @@ public class VotingSession {
 
     private void verifyDate(Instant startAt, Instant endAt){
         Instant now = Instant.now();
-        Instant nowMinusSecond = now.minusSeconds(1);
+        Instant nowMinusOneSecond = now.minusSeconds(1);
 
         if(startAt == null && endAt == null){
             this.startAt = now;
@@ -64,7 +60,7 @@ public class VotingSession {
             endAt = startAt.plusSeconds(60);
         }
 
-        boolean isValid = startAt.isAfter(nowMinusSecond) && startAt.isBefore(endAt);
+        boolean isValid = startAt.isAfter(nowMinusOneSecond) && startAt.isBefore(endAt);
 
         if (isValid){
             this.startAt = startAt;

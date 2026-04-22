@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VotingSessionService {
 
-    private final VotingSessionRepository votingSessionrepository;
+    private final VotingSessionRepository votingSessionRepository;
 
     public VotingSessionResponse create(CreateSessionRequest request){
 
@@ -27,14 +27,14 @@ public class VotingSessionService {
                 request.endAt()
         );
 
-        votingSessionrepository.save(votingSession);
+        votingSessionRepository.save(votingSession);
 
         return toResponse(votingSession);
     }
 
     public List<VotingSessionResponse> findAll(){
 
-        return votingSessionrepository
+        return votingSessionRepository
                 .findAll()
                 .stream()
                 .map(this::toResponse)
@@ -45,7 +45,7 @@ public class VotingSessionService {
 
         Instant now = Instant.now();
 
-        return votingSessionrepository
+        return votingSessionRepository
                 .findByStartAtBeforeAndEndAtAfter(now, now)
                 .stream()
                 .map(this::toResponse)

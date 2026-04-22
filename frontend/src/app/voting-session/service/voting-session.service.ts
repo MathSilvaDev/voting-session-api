@@ -21,6 +21,7 @@ export class VotingSessionService {
     return this.http.get<VotingSessionResponse[]>(`${this.API_URL}`)
   }
 
+  //not used
   findAllActivated(): Observable<VotingSessionResponse[]>{
     return this.http.get<VotingSessionResponse[]>(`${this.API_URL}/activated`)
   }

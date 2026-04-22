@@ -30,10 +30,6 @@ public class Member {
         this.cpf = normalizeCpf(cpf);
     }
 
-    public void addVote(Vote vote){
-        votes.add(vote);
-    }
-
     public static String normalizeCpf(String cpf){
         //TODO: Implement full CPF validation logic (currently only normalizing input)
         String replacedCpf = cpf.replaceAll("[^0-9]", "");

@@ -59,7 +59,7 @@ export class VotingSession {
     });
   }
 
-  vote(voteValue: string, sessionId: number, form: NgForm){
+  vote(voteValue: string, sessionId: number){
 
     let cpf = (this.cpf ?? "").trim().replace(/\D/g, "");
 
@@ -70,7 +70,7 @@ export class VotingSession {
 
     this.cpfError = false;
 
-    this.voteService.vote(voteValue, this.cpf, sessionId).subscribe({
+    this.voteService.vote(voteValue, cpf, sessionId).subscribe({
       next: () => {
         this.votingSessions.forEach((v) => {
           if(v.id === sessionId){
@@ -83,7 +83,7 @@ export class VotingSession {
               v.votingSessionInfo.noVotes++
             }
           }
-        })
+        });
       },
       error: (err) => {
         console.log(err);

@@ -1,7 +1,6 @@
 package com.matheus.voting_session_api.votingsession.controller;
 
 import com.matheus.voting_session_api.votingsession.dto.request.CreateSessionRequest;
-import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionInfo;
 import com.matheus.voting_session_api.votingsession.dto.response.VotingSessionResponse;
 import com.matheus.voting_session_api.votingsession.service.VotingSessionService;
 import jakarta.validation.Valid;
@@ -35,6 +34,7 @@ public class VotingSessionController {
         );
     }
 
+    //not used
     @GetMapping("/activated")
     public ResponseEntity<List<VotingSessionResponse>> findAllActivated(){
         return ResponseEntity.ok(
