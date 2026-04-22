@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { VotingSessionResponse } from './model/response/voting-session-response';
 import { CreateSessionRequest } from './model/request/create-session-request';
 import { VotingSessionService } from './service/voting-session.service';
@@ -22,6 +22,7 @@ export class VotingSession {
   votingSessions: VotingSessionResponse[] = [];
 
   cpf: string = '';
+  cpfError: boolean = false;
 
   constructor(
     private votingSessionService: VotingSessionService,
@@ -32,7 +33,9 @@ export class VotingSession {
     this.findAll();
   }
 
-  createVotingSession(){
+  createVotingSession(form: NgForm){
+    if(form.invalid) return;
+
     const request: CreateSessionRequest = this.getDefaultVotingRequest();
 
     this.votingSessionService.create(request).subscribe({
@@ -56,7 +59,17 @@ export class VotingSession {
     });
   }
 
-  vote(voteValue: string, sessionId: number){
+  vote(voteValue: string, sessionId: number, form: NgForm){
+
+    let cpf = (this.cpf ?? "").trim().replace(/\D/g, "");
+
+    if (cpf.length !== 11) {
+      this.cpfError = true;
+      return;
+    }
+
+    this.cpfError = false;
+
     this.voteService.vote(voteValue, this.cpf, sessionId).subscribe({
       next: () => {
         this.votingSessions.forEach((v) => {
