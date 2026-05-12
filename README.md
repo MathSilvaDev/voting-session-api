@@ -6,6 +6,8 @@ once per session.
 
 > Backend-focused project built with Spring Boot. Frontend (Angular) only consumes the API.
 
+Live deployment: https://voting-session-api.onrender.com/
+
 ---
 
 ## Technologies
@@ -109,26 +111,6 @@ SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
 ```
 
 The Hibernate dialect is not configured explicitly. Spring Boot detects PostgreSQL automatically.
-
----
-
-## Deployment
-
-The application is prepared for deployment on Render using Docker:
-
-* Frontend: Angular production build served by Spring Boot static resources
-* Backend: Spring Boot running in a Docker container
-* Database: Neon PostgreSQL
-
-Required production environment variables:
-
-```
-PORT=8080
-SPRING_DATASOURCE_URL=jdbc:postgresql://host/database?sslmode=require&channel_binding=require
-SPRING_DATASOURCE_USERNAME=database_user
-SPRING_DATASOURCE_PASSWORD=database_password
-SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
-```
 
 ---
 
