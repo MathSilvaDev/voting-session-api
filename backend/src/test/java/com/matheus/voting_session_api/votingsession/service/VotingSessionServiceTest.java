@@ -55,7 +55,8 @@ class VotingSessionServiceTest {
 
             assertEquals(request.topic(), response.topic());
             assertEquals(request.description(), response.description());
-            assertTrue(response.isActivated());
+            assertNotNull(response.startAt());
+            assertNotNull(response.endAt());
 
             verify(votingSessionRepository).save(any(VotingSession.class));
         }

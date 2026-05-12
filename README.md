@@ -12,7 +12,7 @@ once per session.
 * Java
 * Spring Boot
 * Spring Data JPA
-* H2 Database (in-memory)
+* PostgreSQL
 * Maven
 * Angular
 * TypeScript
@@ -63,6 +63,9 @@ Make sure you have installed:
 
 ### 1. Run Backend (in backend folder)
 
+Before running the backend, configure PostgreSQL connection values.
+For local development, the application expects a PostgreSQL database named `voting_session_api` unless environment variables override it.
+
 ```
 ./mvnw spring-boot:run
 ```
@@ -94,18 +97,38 @@ http://localhost:4200
 
 ## Database
 
-* H2 in-memory database
-* Access console:
+* PostgreSQL database
+* Production database: Neon PostgreSQL
+* The datasource is configured with environment variables:
 
 ```
-http://localhost:8080/h2-console
+SPRING_DATASOURCE_URL=jdbc:postgresql://host/database?sslmode=require&channel_binding=require
+SPRING_DATASOURCE_USERNAME=database_user
+SPRING_DATASOURCE_PASSWORD=database_password
+SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
 ```
 
-### Default Configuration:
+The Hibernate dialect is not configured explicitly. Spring Boot detects PostgreSQL automatically.
 
-* JDBC URL: jdbc:h2:mem:testdb
-* User: sa
-* Password: (empty)
+---
+
+## Deployment
+
+The application is prepared for deployment on Render using Docker:
+
+* Frontend: Angular production build served by Spring Boot static resources
+* Backend: Spring Boot running in a Docker container
+* Database: Neon PostgreSQL
+
+Required production environment variables:
+
+```
+PORT=8080
+SPRING_DATASOURCE_URL=jdbc:postgresql://host/database?sslmode=require&channel_binding=require
+SPRING_DATASOURCE_USERNAME=database_user
+SPRING_DATASOURCE_PASSWORD=database_password
+SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+```
 
 ---
 
@@ -126,4 +149,5 @@ http://localhost:8080/h2-console
 
 ## Author
 
-Matheus R.M Silva
+Matheus Silva<br>
+GitHub: [MathSilvaDev](https://github.com/MathSilvaDev)
