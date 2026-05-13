@@ -1,135 +1,94 @@
 # Voting Session API
 
-Simple voting session API where users can create 
-sessions and vote using CPF. Each CPF can vote only 
-once per session.
-
-> Backend-focused project built with Spring Boot. Frontend (Angular) only consumes the API.
+API for creating voting sessions and registering votes by CPF. Each CPF can vote only once per session.
 
 Live deployment: https://voting-session-api.onrender.com/
 
----
+## Stack
 
-## Technologies
-* Java
-* Spring Boot
-* Spring Data JPA
-* PostgreSQL
-* Maven
-* Angular
-* TypeScript
-* HTML / SCSS
-* Node.js
-* npm
-* JUnit
-* Mockito
-
----
-
-## Requirements
-
-Make sure you have installed:
-
-* Java 21+
-* Maven
-* Node.js
-* npm
-* Angular CLI
-
----
+- Java 21
+- Spring Boot 3
+- Spring Data JPA
+- PostgreSQL
+- Maven
+- Angular 20
+- TypeScript
+- JUnit and Mockito
 
 ## Features
-* Create voting sessions 
-* List all sessions 
-* List active sessions 
-* Vote in a session (YES / NO)
-* CPF-based voting (1 vote per session)
-* Automatic vote counting 
-* Global exception handling
 
----
+- Voting session creation
+- Voting session listing
+- Active session filtering
+- CPF-based voting
+- One-vote-per-CPF rule for each session
+- Automatic vote counting
+- Global exception handling
 
-## API Endpoints
+## API Overview
 
-### Voting Sessions
-* POST /api/sessions → Create session
-* GET /api/sessions → List all sessions
-* GET /api/sessions/activated → List active sessions
+- `POST /api/sessions` - create session
+- `GET /api/sessions` - list sessions
+- `GET /api/sessions/activated` - list active sessions
+- `POST /api/votes/{cpf}/sessions/{id}` - vote in a session
 
-### Votes
-* POST /api/votes/{cpf}/sessions/{id} → Vote in a session
+## Running Locally
 
----
+Requirements: Java 21+, Maven, Node.js, npm and Angular CLI.
 
-## Running the Project
+Run the backend:
 
-### 1. Run Backend (in backend folder)
-
-Before running the backend, configure PostgreSQL connection values.
-For local development, the application expects a PostgreSQL database named `voting_session_api` unless environment variables override it.
-
-```
+```bash
+cd backend
 ./mvnw spring-boot:run
 ```
 
-API will be available at:
+On Windows:
 
+```bash
+cd backend
+mvnw.cmd spring-boot:run
 ```
-http://localhost:8080
-```
 
-### 2. Run Frontend (in frontend folder)
+Run the frontend:
 
-
-```
+```bash
+cd frontend
 npm install
+npm start
 ```
 
-```
-ng serve --open
-```
+URLs:
 
-Frontend will be available at:
-
-```
-http://localhost:4200
+```text
+Backend:  http://localhost:8080
+Frontend: http://localhost:4200
 ```
 
----
+For local backend execution, configure a PostgreSQL database named `voting_session_api` or set the datasource environment variables.
 
-## Database
+## Testing
 
-* PostgreSQL database
-* Production database: Neon PostgreSQL
-* The datasource is configured with environment variables:
-
-```
-SPRING_DATASOURCE_URL=jdbc:postgresql://host/database?sslmode=require&channel_binding=require
-SPRING_DATASOURCE_USERNAME=database_user
-SPRING_DATASOURCE_PASSWORD=database_password
-SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+```bash
+cd backend
+./mvnw test
 ```
 
-The Hibernate dialect is not configured explicitly. Spring Boot detects PostgreSQL automatically.
+## Project Structure
 
----
+```text
+backend/
+|-- api
+|-- votingsession
+|-- vote
+|-- member
+|-- exception
+`-- infrastructure
 
-## Tests
-
-* Unit tests implemented
-
----
-
-## Notes
-
-* CPF is normalized before saving
-* Each CPF can vote only once per session (database constraint)
-* Sessions have start and end time validation
-* Default session duration: 60 seconds (if not provided)
-
----
+frontend/     Angular application
+```
 
 ## Author
 
-Matheus Silva<br>
+Matheus Silva  
 GitHub: [MathSilvaDev](https://github.com/MathSilvaDev)
