@@ -90,5 +90,5 @@ frontend/     Angular application
 
 ## Author
 
-Matheus Silva  
+Matheus R.M Silva  
 GitHub: [MathSilvaDev](https://github.com/MathSilvaDev)
